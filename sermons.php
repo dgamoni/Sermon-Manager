@@ -348,7 +348,7 @@ class SermonManager { // phpcs:ignore
 
 					add_action( 'wp_print_scripts', array( __CLASS__, 'maybe_print_cloudflare_plyr' ) );
 					add_action( 'wp_print_footer_scripts', array( __CLASS__, 'maybe_print_cloudflare_plyr' ) );
-				} else if( \SermonManager::getOption( 'archive_player' ) &&  is_post_type_archive( 'wpfc_sermon' ) ) {
+				} else if( \SermonManager::getOption( 'archive_player' ) &&  is_post_type_archive( 'wpfc_sermon' ) &&  wpfc_check_audio_in_archive() ) {
 					wp_enqueue_script( 'wpfc-sm-plyr' );
 					wp_enqueue_script( 'wpfc-sm-plyr-loader' );
 				} else if ( ! is_post_type_archive( 'wpfc_sermon' ) ) {

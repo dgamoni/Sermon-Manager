@@ -891,3 +891,32 @@ add_action( 'save_post', 'sm_set_service_type' );
 function sm_get_taxonomies() {
 	return get_object_taxonomies( 'wpfc_sermon' );
 }
+
+/**
+ * Helper check audio in archive page
+ *
+ * @return True|false if exist meta key 'sermon_audio_id'.
+ */
+function wpfc_check_audio_in_archive() {
+
+	$args = array(
+		'post_type'   => 'wpfc_sermon',
+		'post_status' => 'pubish',
+	    'meta_query'     => array(
+	        'relation' => 'AND',
+	        array(
+	            'key'     => 'sermon_audio_id',
+		        'value'   => '0',
+		        'compare' => '!=',
+	        ),
+	    ),
+	);
+
+	$query = new WP_Query( $args );
+
+	if( intval( $query->found_posts) > 0) {
+		return true;
+	} else {
+		return false;
+	}
+}
